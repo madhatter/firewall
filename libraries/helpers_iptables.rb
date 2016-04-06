@@ -49,7 +49,7 @@ module FirewallCookbook
       end
 
       def iptables_packages(new_resource)
-        if ipv6_enabled?(new_resource)
+        if ipv6_enabled?(new_resource) && !node['platform'] == 'arch'
           %w(iptables iptables-ipv6)
         else
           %w(iptables)
@@ -57,7 +57,7 @@ module FirewallCookbook
       end
 
       def iptables_commands(new_resource)
-        if ipv6_enabled?(new_resource)
+        if ipv6_enabled?(new_resource) && !node['platform'] == 'arch'
           %w(iptables ip6tables)
         else
           %w(iptables)
